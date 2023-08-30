@@ -4,6 +4,26 @@
 
     <div class="example-wrapper">
         <h1>Create new post!</h1>
-        {{ form(form) }}
+        {{ form_start(form) }}
+            {{ form_label(form.title) }}
+            <br>
+            {{ form_widget(form.title) }}
+            <br><br>
+            {{ form_label(form.content) }}
+            <br>
+            {{ form_widget(form.content) }}
+            <br><br>
+            {{ form_label(form.category) }}
+            <br>
+            {{ form_widget(form.category) }}
+            <br><br>
+            {{ form_label(form.author) }}
+            <br>
+            {{ form_widget(form.author) }}
+            <br><br>
+            <button type="submit">Save</button>
+            <button type="reset">Reset</button>
+        {{ form_end(form) }}
+
     </div>
 {% endblock %}
