@@ -17,20 +17,21 @@ class Post
     #[ORM\Column(length: 255)]
     private ?string $title = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(type: Types::TEXT)]
     private ?string $content = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?\DateTimeInterface $creation_date = null;
+    #[ORM\Column(name: 'creationAt', type: Types::DATETIME_MUTABLE)]
+    private ?\DateTimeInterface $creationAt = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
-    private ?\DateTimeInterface $edit_date = null;
+    #[ORM\Column(name: 'editAt', type: Types::DATETIME_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $editAt = null;
 
     #[ORM\Column(length: 255)]
     private ?string $author = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $category = null;
+    #[ORM\ManyToOne(inversedBy: 'options')]
+    private ?Category $category = null;
+
 
     public function getId(): ?int
     {
@@ -61,26 +62,26 @@ class Post
         return $this;
     }
 
-    public function getCreationDate(): ?\DateTimeInterface
+    public function getCreationAt(): ?\DateTimeInterface
     {
-        return $this->creation_date;
+        return $this->creationAt;
     }
 
-    public function setCreationDate(\DateTimeInterface $creation_date): static
+    public function setCreationAt(\DateTimeInterface $creationAt): static
     {
-        $this->creation_date = $creation_date;
+        $this->creationAt = $creationAt;
 
         return $this;
     }
 
-    public function getEditDate(): ?\DateTimeInterface
+    public function getEditAt(): ?\DateTimeInterface
     {
-        return $this->edit_date;
+        return $this->editAt;
     }
 
-    public function setEditDate(?\DateTimeInterface $edit_date): static
+    public function setEditAt(?\DateTimeInterface $editAt): static
     {
-        $this->edit_date = $edit_date;
+        $this->editAt = $editAt;
 
         return $this;
     }
@@ -97,12 +98,12 @@ class Post
         return $this;
     }
 
-    public function getCategory(): ?string
+    public function getCategory(): ?Category
     {
         return $this->category;
     }
 
-    public function setCategory(string $category): static
+    public function setCategory(?Category $category): static
     {
         $this->category = $category;
 

@@ -10,6 +10,9 @@
 
 <div class="example-wrapper">
     <h1>Hello reader!</h1>
-
+    {%  for post in posts %}
+    <p> {{ post.title }}</p>
+        <p>{{ post.content }}</p>
+    {% endfor %}
 </div>
 {% endblock %}
