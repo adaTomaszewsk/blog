@@ -6,19 +6,26 @@ use App\Entity\Post;
 use App\Form\Type\PostType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class PostController extends AbstractController
 {
     private EntityManagerInterface $entityManager;
-    public function __construct(EntityManagerInterface $entityManager)
-    {
+    private UserInterface $currentUser;
+    public function __construct(
+        EntityManagerInterface $entityManager,
+        Security $security
+    ) {
         $this->entityManager = $entityManager;
+        $this->currentUser = $security->getUser();
     }
 
-    #[Route('/post', name: 'post_all_posts')]
+    #[Route('/', name: 'post_all_posts')]
     public function getPosts(): Response
     {
         $posts = $this->entityManager->getRepository(Post::class)->findAll();
@@ -41,6 +48,7 @@ public function createNewPost(Request $request): Response
     $form->handleRequest($request);
     if ($form->isSubmitted() && $form->isValid()) {
         $post = $form->getData();
+        $post->setAuthor($this->currentUser);
         $post->setCreationAt(new \DateTime('now'));
         $this->entityManager->persist($post);
         $this->entityManager->flush();
