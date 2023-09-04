@@ -8,11 +8,34 @@
 {#    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }#}
 {#</style>#}
 
-<div class="example-wrapper">
-    <h1>Hello reader!</h1>
-    {%  for post in posts %}
-    <p> {{ post.title }}</p>
-        <p>{{ post.content }}</p>
-    {% endfor %}
-</div>
+    <div class="example-wrapper">
+        <div class='postContainer'>
+            <h1 class="postWelcome">Hello reader!</h1>
+            <a class='a' href={{ path('post_create_new') }}>
+                <button class='postButton'> + </button>
+            </a>
+        </div>
+        {% for post in posts %}
+                <div class="postCard">
+                    <div class='postContainer'>
+                        <div></div>
+                        <a class='a' href={{ path('post_edit', { 'id': post.id }) }}>
+                            <div class='postTitle'>{{ post.title }}</div>
+                        </a>
+                        <a  class='a' href={{ path('post_delete', { 'id': post.id }) }}>
+                            <button>Delete</button>
+                        </a>
+                    </div>
+                    {% if post.editAt is not null %}
+                        <p class='postCreatedAt'>Edited at: {{ post.editAt|date('m/d/Y') }}</p>
+                    {% else  %}
+                        <p class='postCreatedAt'>Created at: {{ post.creationAt|date('m/d/Y') }}</p>
+                    {%  endif %}
+                    <p class="postContent">{{ post.content|raw }}</p>
+                    <p class='postAuthor'>Written by: {{ post.author }}</p>
+                </div>
+
+        {% endfor %}
+    </div>
 {% endblock %}
+

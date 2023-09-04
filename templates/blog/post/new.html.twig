@@ -3,19 +3,19 @@
 {% block body %}
 
     <div class="example-wrapper">
-        <h1>Create new post!</h1>
+        <h1>{{ title}} new post!</h1>
         {{ form_start(form) }}
-            {{ form_label(form.title) }}
-            <br>
-            {{ form_widget(form.title) }}
-            <br><br>
+        <p>{{ form_label(form.title) }}</p>
+
+        <div>{{ form_widget(form.title, {'attr': {'class': 'formInput'}}) }}</div>
+           <br>
             {{ form_label(form.content) }}
             <br>
-            {{ form_widget(form.content) }}
+            {{ form_widget(form.content, {'attr': {'class': 'tinyMCEInput'}}) }}
             <br><br>
             {{ form_label(form.category) }}
             <br>
-            {{ form_widget(form.category) }}
+            {{ form_widget(form.category, {'attr': {'class': 'categoryForm'}}) }}
             <br><br>
             {{ form_label(form.author) }}
             <br>
