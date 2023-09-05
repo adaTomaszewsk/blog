@@ -38,10 +38,26 @@ body{
     color: gray;
     text-align: right;
 }
+.commentAuthor {
+    font-size: small;
+    color: gray;
+    text-align: left;
+}
 .postCreatedAt {
     font-size: small;
     color: gray;
     text-align: center;
+}
+.commentCreatedAt {
+    font-size: small;
+    color: gray;
+    text-align: center;
+}
+.commentContainer{
+    padding: 15px 22px;
+    margin: 12px;
+    border-radius: 12px;
+    background-color: white;
 }
 
 
@@ -53,6 +69,10 @@ a{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+}
+.authorAndDataContainer{
+    display: flex;
+    flex-direction: row;
 }
 
 .postButton{

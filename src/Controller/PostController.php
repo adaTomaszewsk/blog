@@ -29,9 +29,6 @@ class PostController extends AbstractController
     public function getPosts(): Response
     {
         $posts = $this->entityManager->getRepository(Post::class)->findAll();
-        if(!$posts){
-            throw $this->createNotFoundException('No post found');
-        }
 
         return
             $this->render('blog/index.html.twig', [

@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="postCard">
+        <div class='postTitle'>{{ post.title }}</div>
+        <p class='postCreatedAt'>Created at: {{ post.creationAt|date('m/d/Y') }}</p>
+        <p class="postContent">{{ post.content|raw }}</p>
+        <p class='postAuthor'>Written by: {{ post.author.username }}</p>
+    </div>
+
+    <br>
+    <hr>
+    <br>
+    <h2>Comments {{ comments|length }}</h2>
+    <br>
+    {% for comment in comments %}
+        <div class="commentContainer">
+            <p>{{ comment.content|raw }}</p>
+            <div class="authorAndDataContainer">
+                <p class="commentAuthor">{{ comment.createdBy.username }}</p>
+{#               no braking space #}
+                &nbsp;
+                <p class="commentAuthor">{{ comment.createdAt|date('m/d/Y') }}</p>
+            </div>
+        </div>
+    {% endfor %}
+    <br>
+
+    {{ form_start(form) }}
+        {{ form_row(form._token) }}
+        <p>{{ form_label(form.content) }}</p>
+        <div>{{ form_widget(form.content, {'attr': {'class': 'tinyMCEInput'}}) }}</div>
+        <br><br>
+        <button type="submit">Save</button>
+        <button type="reset">Reset</button>
+    {{ form_end(form) }}
+
+
+
+
+{% endblock %}
