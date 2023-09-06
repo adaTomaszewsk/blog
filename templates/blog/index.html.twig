@@ -31,6 +31,7 @@
                                     <button>Edit</button>
                                 {% endif %}
                             </a>
+                            &nbsp; &nbsp; &nbsp;
                             <a  class='a' href={{ path('post_delete', { 'id': post.id }) }}>
                                 {% if post.author.id == app.user.id %}
                                     <button>Delete</button>
@@ -39,9 +40,9 @@
                         </div>
                     </div>
                     {% if post.editAt is not null %}
-                        <p class='postCreatedAt'>Edited at: {{ post.editAt|date('m/d/Y') }}</p>
+                        <p class='postCreatedAt'>Edited at: {{ post.editAt|date('d/m/y H:i') }}</p>
                     {% else  %}
-                        <p class='postCreatedAt'>Created at: {{ post.creationAt|date('m/d/Y') }}</p>
+                        <p class='postCreatedAt'>Created at: {{ post.creationAt|date('d/m/y H:i') }}</p>
                     {%  endif %}
                     <p class="postContent">{{ post.content|raw }}</p>
                     <p class='postAuthor'>Written by: {{ post.author.username }}</p>

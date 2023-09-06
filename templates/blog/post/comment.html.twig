@@ -20,7 +20,7 @@
                 <p class="commentAuthor">{{ comment.createdBy.username }}</p>
 {#               no braking space #}
                 &nbsp;
-                <p class="commentAuthor">{{ comment.createdAt|date('m/d/Y') }}</p>
+                <p class="commentAuthor">{{ comment.createdAt|date('d/m/y H:i') }}</p>
             </div>
         </div>
     {% endfor %}
